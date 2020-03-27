@@ -5,6 +5,7 @@
  */
 package com.carlosiglesias.EvidenciaFinalBack;
 
+import com.carlosiglesias.EvidenciaFinalBack.Security.JWTAuthorizationFilter;
 import java.util.Collections;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
