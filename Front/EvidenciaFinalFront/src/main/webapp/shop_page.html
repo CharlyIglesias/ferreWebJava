@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <style>
+        .centered{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .lefted{
+            margin-left: 24%;
+        }
+        .form-control{
+            padding: 25px 10px !important;
+            line-height: 28px !important;
+            font-size: 24px !important;
+        }
+        .btn{
+            padding: 12px 35px !important;
+            text-align: center;
+            text-decoration: none;
+        }
+        .lined{
+            margin-right: 13%;
+            margin-left: 11%;
+        }
+        
+        .imageChiquita{
+            object-fit: cover;
+            height: 10rem;
+        }
+        .body2{
+            padding: 0 !important;
+        }
+        .cuspadding{
+            padding: 6.3rem 1.25rem 1.25rem 1.25rem !important;
+        }
+        .margen{
+            margin-left: 10%;
+        }
+         .divider{
+            border-right: 1px solid #ccc;
+            margin-right: 3%;
+            padding-right: 3%;
+        }
+        @media only screen and (min-width: 768px){
+            .tarjetas{
+            max-width: 23em;
+            }
+        }
+        @media only screen and (min-width: 992px){
+            .tarjetas{
+            max-width: 23em;
+            height: 10em;
+            }
+            .card-img{
+                height: 10em;
+                object-fit: cover;
+            }
+        }
+        
+        @media only screen and (min-width: 1591px){
+            .tarjetas{
+               max-width: 32em; 
+            }
+            .card-img{
+                height: 99%;
+                object-fit: cover;
+            }
+        }
+    </style>
+        
+        <title>Shop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+        <script> 
+            $(function(){
+              $("#includedContent").load("index.html");
+              $('#footer').load("footer.html");
+            });
+        </script> 
+    </head>
+    <body>
+        <div id="includedContent"></div>
+        <div class="row">
+            <p class="font-weight-light centered" style="font-size:60px;">Fast. Secure. Complete.</p>
+        </div>
+        <form class="form-inline my-2 my-lg-0 lefted">
+            <input class="form-control mr-sm-2 grande" style="width: 55% !important" type="search" placeholder="Search Products" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+         </form>
+        <br>
+        <hr style="margin-top: 10px; border-top: 1px solid #e6e6e6">
+        <div class="row">
+            <p class="font-weight-light centered" style="font-size:50px;">Featured Categories</p>
+        </div>
+        <div class="row">
+            <p class="font-weight-light centered" style="font-size:20px;">You can click it but it won't do a thing.</p>
+        </div>
+        <div class="row lined">
+            
+                <div class="card-deck mx-auto">
+                    <a class="nodecored" href="#">
+                        <div class="card" style="width: 13rem;height: 14.5rem;">
+                              <img class="card-img-top imageChiquita" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
+                              <hr style="border-top: 1px solid #e6e6e6">
+                              <div class="card-body body2">
+                                  <div class="row">
+                                      <div class="col-8">
+                                          <h6 class="card-title margen">Cleaning</h6>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                    </a>
+            
+                
+                    <a class="nodecored" href="#">
+                        <div class="card" style="width: 13rem;height: 14.5rem;">
+                              <img class="card-img-top imageChiquita" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
+                              <hr style="border-top: 1px solid #e6e6e6">
+                              <div class="card-body body2">
+                                  <div class="row">
+                                      <div class="col-8">
+                                          <h6 class="card-title margen">Paint</h6>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                    </a>
+            
+           
+                    <a class="nodecored" href="#">
+                        <div class="card" style="width: 13rem;height: 14.5rem;">
+                              <img class="card-img-top imageChiquita" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
+                              <hr style="border-top: 1px solid #e6e6e6">
+                              <div class="card-body body2">
+                                  <div class="row">
+                                      <div class="col-8">
+                                          <h6 class="card-title margen">Security</h6>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                    </a>
+                    <a class="nodecored" href="#">
+                        <div class="card bg-dark text-white"style="width: 13rem;height: 14.5rem;">
+                            <img class="card-img" style="height: 100%;" src="https://www.colores.org.es/imagenes_colores/gris-claro.jpg" alt="Card image">
+                            <div class="card-img-overlay cuspadding">
+                              <h5 class="card-title" style="text-align: center">Shop Now!</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>     
+        </div>
+        <br>
+        <hr style="border-top: 1px solid #e6e6e6">
+        <div class="row">
+            <div class="col-7">
+                <p class="font-weight-light lefted" style="font-size:60px;">Newsletter</p>
+                <p class="lefted" style="max-width: 60%;">Join Now! to a hundred people that allow us to spam your email with non important information. By joining you agreed the terms and conditions described below.</p>
+            </div>
+            <div class="col-5">
+                <form class="form-inline my-2 my-lg-0" style="margin-top: 9% !important">
+                    <input class="form-control mr-sm-2" style="width: 55% !important" type="search" placeholder="Email Address" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Subscribe</button>
+                  </form>
+            </div>
+        </div>
+        <br>
+        <hr style="border-top: 1px solid #e6e6e6">
+        <br>
+        <div class="row">
+            <div class="col-4 divider">
+                <p class="font-weight-light" style="font-size:33px; margin-left: 12%">Fast. Secure. Complete.</p>
+                <p class="font-weight-light centered" style="font-size:20px; max-width: 76%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <button class="btn btn-secondary my-2 my-sm-0" style="margin-left:12%" type="submit">Browse All</button>
+            </div>
+            <div class="col-7">
+                <div class="row">
+                    <div class="card-deck mx-auto">
+                    <a class="nodecored" href="#">
+                        <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+            
+                    <a class="nodecored" href="#">
+                       <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+                
+                    <div class="card-deck mx-auto">
+                    <a class="nodecored" href="#">
+                        <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+            
+                    <a class="nodecored" href="#">
+                       <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+                    <div class="card-deck mx-auto">
+                    <a class="nodecored" href="#">
+                        <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+            
+                    <a class="nodecored" href="#">
+                       <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+        <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px;">
+        <div id="footer"></div>
+        <br>
+    </body>
+</html>

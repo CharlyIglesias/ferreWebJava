@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <style>
+        .card-columns{
+            max-width: 32em;
+            display: inline-table;
+        }
+        .card-title{
+            font-size: 23px;
+        }
+        .card-text{
+            font-size: 17px;
+        }
+        .nodecored{
+            text-decoration: none;
+            color: black;
+        }
+        .grandes{
+            padding: 12px 35px !important;
+            text-align: center;
+            text-decoration: none;
+        }
+        .lefted{
+            margin-left: 19%;
+            margin-bottom: 0;
+        }
+        .form-control{
+            margin-bottom: 15px;
+        }
+        .options{
+            max-width: 44%;
+        }
+        
+
+/* CHECKBOXES*/
+:root {
+	--white: #ffffff;
+	--light: #f0eff3;
+	--black: #000000;
+	--dark-blue: #1f2029;
+	--dark-light: #353746;
+	--red: #da2c4d;
+	--yellow: #f8ab37;
+	--grey: #ecedf3;
+}
+
+::selection {
+	color: var(--white);
+	background-color: var(--black);
+}
+::-moz-selection {
+	color: var(--white);
+	background-color: var(--black);
+}
+mark{
+	color: var(--white);
+	background-color: var(--black);
+}
+.section {
+    position: relative;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+.over-hide {
+    overflow: hidden;
+}
+.z-bigger {
+    z-index: 100 !important;
+}
+
+.background-color{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--dark-blue);
+	z-index: 1;
+	-webkit-transition: all 300ms linear;
+	transition: all 300ms linear; 
+}
+.checkbox:checked ~ .background-color{
+	background-color: var(--white);
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked),
+[type="radio"]:checked,
+[type="radio"]:not(:checked){
+	position: absolute;
+	left: -9999px;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+}
+.checkbox:checked + label,
+.checkbox:not(:checked) + label{
+	position: relative;
+	width: 70px;
+	display: inline-block;
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+	margin: 17px 0;
+	margin-top: 100px;
+	height: 6px;
+	border-radius: 4px;
+	z-index: 100 !important;
+}
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before {
+	position: absolute;
+	font-family: 'unicons';
+	cursor: pointer;
+	top: -17px;
+	z-index: 2;
+	font-size: 20px;
+	line-height: 40px;
+	text-align: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	-webkit-transition: all 300ms linear;
+	transition: all 300ms linear; 
+}
+.checkbox:not(:checked) + label:before {
+	content: '\eac1';
+	left: 0;
+	color: var(--grey);
+	background-color: var(--dark-light);
+	box-shadow: 0 4px 4px rgba(0,0,0,0.15), 0 0 0 1px rgba(26,53,71,0.07);
+}
+.checkbox:checked + label:before {
+	content: '\eb8f';
+	left: 30px;
+	color: var(--yellow);
+	background-color: var(--dark-blue);
+	box-shadow: 0 4px 4px rgba(26,53,71,0.25), 0 0 0 1px rgba(26,53,71,0.07);
+}
+
+.checkbox:checked ~ .section .container .row .col-12 p{
+	color: var(--dark-blue);
+}
+
+
+.checkbox-tools:checked + label,
+.checkbox-tools:not(:checked) + label{
+	position: relative;
+	display: inline-block;
+	padding: 20px;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: 1px;
+	margin: 0 auto;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	border-radius: 4px;
+	overflow: hidden;
+	cursor: pointer;
+	text-transform: uppercase;
+	color: var(--white);
+	-webkit-transition: all 300ms linear;
+	transition: all 300ms linear; 
+}
+.checkbox-tools:not(:checked) + label{
+	background-color: var(--dark-light);
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.checkbox-tools:checked + label{
+	background-color: transparent;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.checkbox-tools:not(:checked) + label:hover{
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.checkbox-tools:checked + label::before,
+.checkbox-tools:not(:checked) + label::before{
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 4px;
+	background-image: linear-gradient(298deg, var(--red), var(--yellow));
+	z-index: -1;
+}
+.checkbox-tools:checked + label .uil,
+.checkbox-tools:not(:checked) + label .uil{
+	font-size: 24px;
+	line-height: 24px;
+	display: block;
+	padding-bottom: 10px;
+}
+
+.checkbox:checked ~ .section .container .row .col-12 .checkbox-tools:not(:checked) + label{
+	background-color: var(--light);
+	color: var(--dark-blue);
+	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+
+    </style>
+        
+        <title>Shopping Cart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+    <script> 
+            $(function(){
+              $("#includedContent").load("index.html");
+              $('#footer').load("footer.html");
+            });
+        </script> 
+    </head>
+    <body>
+        <div id="includedContent"></div>
+        <br>
+        <div class="row" style="margin-left: 3%">
+            <div class="col-4">
+                <p class="font-weight-light" style="font-size:33px; text-align: right; color: #6c757d">1. Shopping Cart</p>
+            </div>
+            <div class="col-4">
+                <p class="font-weight-light" style="font-size:33px; text-align: center;">2. Shipping Details</p>
+            </div>
+            <div class="col-4">
+                <p class="font-weight-light" style="font-size:33px; text-align: left; color: #6c757d">3. Payment Options</p>
+            </div>
+        </div>
+        <div class="progress" style="height: 1px; margin-left: 16%; max-width: 77%">
+            <div class="progress-bar" role="progressbar" style="width: 63%; background-color: #6c757d" aria-valuenow="21" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <br>
+        <div class="row">
+        <div class="col-8" style="">
+            <p class="font-weight-light" style="font-size:33px; text-align: left; padding-left: 26.8%">Shipping Details</p>
+            <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">
+        <form class="form" style="margin-left:22%; margin-right: 16%;">
+            <div class="row" style="margin-top: 20px">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="First name">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Last name">
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Address">
+            <input type="text" class="form-control" placeholder="Email Address">
+            <div class="row">
+                <div class="col">
+                  <select class="custom-select">
+                    <option selected>Country</option>
+                    <option value="MX">México</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="City">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Zip/Postal Code">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Phone Number">
+                </div>
+            </div>
+            <hr style="border-top: 1px solid #e6e6e6; margin-top: 10px; width: 66%">
+            
+            
+            <div class="col-12 pb-5" style="margin-left:7%">
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-1" checked>
+                <label class="for-checkbox-tools" for="tool-1">
+                        Free Shipping (2-5 working days)
+                </label><!--
+                --><input class="checkbox-tools" type="radio" name="tools" id="tool-2">
+                <label class="for-checkbox-tools" for="tool-2">
+                        Next Day Delivery - $20
+                </label>
+            </div>
+            
+            
+        </form>
+
+        </div>
+        <div class="col-4">
+            <p class="font-weight-light" style="font-size:33px; text-align: left;">Summary</p>
+            <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
+                <div class="card-columns">
+                    <a class="nodecored" href="#">
+                       <div class="card mb-3 tarjetas">
+                        <div class="row no-gutters">
+                          <div class="col-md-5">
+                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">$1232</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+
+            </div>
+              <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" style="width:75%; font-weight: bold" placeholder="ENTER COUPON CODE">
+                <button class="btn btn-secondary" style="margin-bottom:15px" type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">SUBTOTAL</p>
+                    </div>
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">SHIPPING</p>
+                    </div>
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">TAXES</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                    </div>
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                    </div>
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                    <p class="font-weight-light lefted" style="font-size: 23px">TOTAL</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                    <p class="font-weight-bold lefted" style="font-size: 23px">$1232</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 100%">
+        <div class="row" style="margin-left:18%">
+            <button class="btn btn-secondary my-2 my-sm-0 grandes" type="submit">Next</button>
+            <button class="btn btn-outline-secondary my-2 my-sm-0 grandes" style="margin-left: 2%" type="submit">Cancel</button>
+        </div>
+        <br>
+        <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">
+        <div id="footer"></div>
+    </body>
+</html>
