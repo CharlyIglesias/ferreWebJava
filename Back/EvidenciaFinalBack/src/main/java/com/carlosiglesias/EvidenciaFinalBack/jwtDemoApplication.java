@@ -60,6 +60,7 @@ public class jwtDemoApplication {
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getProductos").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getPedidos").permitAll()
+				.antMatchers(HttpMethod.POST, "/createProduct").permitAll()
 				.anyRequest().authenticated();
 		}
 	}

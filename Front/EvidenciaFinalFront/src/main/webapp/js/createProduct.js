@@ -15,30 +15,33 @@ $(document).ready(function() {
     image=$('#blah').attr('src');
     console.log(image); //SI JALA
     
+    price2 = parseFloat(price);
+    qty2 = parseFloat(qty);
+    
     var data = {
-    "title": title,
-    "valor": price,
-    "description": description,
-    "qty": qty,
-    "fotoUrl": image
+    "titulo": title,
+    "valor": price2,
+    "descripcion": description,
+    "cantDisponible": qty2,
+    "foto_url": image
     };
     
     $.ajax({
-        'url': 'http://localhost:8081/createProduct',
+        'url': 'http://192.168.1.138:8081/createProduct',
         'type': 'POST',
         'data': JSON.stringify(data),
         headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json' 
-    },
-    
+    }
     }).then(function(data) {
        console.log("data" + data);
-       window.location.replace("/product_list.html");
+       window.location.replace("/EvidenciaFinalFront/product_list.html");
     }).fail(function(error){
         console.log("error:" + error);
-    })
-})
+        window.location.replace("/EvidenciaFinalFront/product_list.html");
+    });
+});
   
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'dtmln7c4k', 
