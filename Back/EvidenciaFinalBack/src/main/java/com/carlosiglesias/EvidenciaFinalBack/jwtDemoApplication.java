@@ -8,6 +8,7 @@ package com.carlosiglesias.EvidenciaFinalBack;
 import com.carlosiglesias.EvidenciaFinalBack.Security.JWTAuthorizationFilter;
 import java.util.Collections;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import org.springframework.web.filter.CorsFilter;
  *
  * @author Carlos Iglesias
  */
+@SpringBootApplication
 public class jwtDemoApplication {
     public static void main(String[] args) {
 		SpringApplication.run(jwtDemoApplication.class, args);
@@ -56,6 +58,8 @@ public class jwtDemoApplication {
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
+                                .antMatchers(HttpMethod.GET, "/getProductos").permitAll()
+                                .antMatchers(HttpMethod.GET, "/getPedidos").permitAll()
 				.anyRequest().authenticated();
 		}
 	}

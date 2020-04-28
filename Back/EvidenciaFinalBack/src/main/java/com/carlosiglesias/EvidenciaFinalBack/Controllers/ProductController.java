@@ -9,9 +9,9 @@ import com.carlosiglesias.EvidenciaFinalBack.Entity.Producto;
 import com.carlosiglesias.EvidenciaFinalBack.Repository.ProductRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +29,9 @@ public class ProductController {
         return this.productRepository.findById(body.getId());
     }
     
-    @PostMapping("/getProducts")
+    @GetMapping("/getProductos")
     public List<Producto> getProducts(){
+        
         List<Producto> DbProduct = this.productRepository.findAll();
         return DbProduct;
     }
@@ -43,9 +44,9 @@ public class ProductController {
             newProd.setTitulo(product.getTitulo());
             newProd.setDescripcion(product.getDescripcion());
             newProd.setValor(product.getValor());
-            newProd.setCantDisponible(product.getCantDisponible());
+            newProd.setcantDisponible(product.getcantDisponible());
             newProd.setDisponible(product.isDisponible());
-            newProd.setFotoUrl(product.getFotoUrl());
+            newProd.setfoto_url(product.getfoto_url());
             productRepository.save(newProd);
             
             return "Success";

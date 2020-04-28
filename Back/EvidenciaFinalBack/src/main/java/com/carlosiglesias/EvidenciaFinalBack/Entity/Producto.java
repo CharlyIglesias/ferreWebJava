@@ -24,7 +24,7 @@ public class Producto {
     private double valor;
     private double cantDisponible;
     private boolean disponible;
-    private String fotoUrl;
+    private String foto_url;
     
     public Producto(){}
     
@@ -66,11 +66,11 @@ public class Producto {
         this.valor = valor;
     }
 
-    public double getCantDisponible() {
+    public double getcantDisponible() {
         return cantDisponible;
     }
 
-    public void setCantDisponible(double cantDisponible) {
+    public void setcantDisponible(double cantDisponible) {
         this.cantDisponible = cantDisponible;
     }
 
@@ -82,11 +82,13 @@ public class Producto {
         this.disponible = disponible;
     }
 
-    public String getFotoUrl() {
-        return fotoUrl;
+    public String getfoto_url() {
+        return foto_url;
     }
 
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
+    public void setfoto_url(String foto_url) {
+        this.foto_url = foto_url;
     }
+
+    
 }
