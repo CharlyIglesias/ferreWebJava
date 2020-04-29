@@ -45,9 +45,7 @@ public class jwtDemoApplication {
             bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
             return bean;
         }
-
-
-	
+        
 	@EnableWebSecurity
 	@Configuration
 	class WebSecurityConfig extends WebSecurityConfigurerAdapter {
