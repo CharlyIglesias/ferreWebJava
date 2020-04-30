@@ -41,6 +41,10 @@ public class Producto {
     public int getId() {
         return id;
     }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -89,6 +93,5 @@ public class Producto {
     public void setfoto_url(String foto_url) {
         this.foto_url = foto_url;
     }
-
     
 }

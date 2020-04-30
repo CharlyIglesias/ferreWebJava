@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,9 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
     
-    @PostMapping("/authenticate")
-    public Producto authenticate(@RequestBody Producto body){
-        return this.productRepository.findById(body.getId());
+    @GetMapping("/findProductById")
+    public Producto findById(@RequestParam(value="id") int id){
+       return this.productRepository.findById(id);
     }
     
     @GetMapping("/getProductos")
@@ -40,7 +41,8 @@ public class ProductController {
     public @ResponseBody String create(@RequestBody Producto product){
         Producto newProd = new Producto();
             //Para editar user se le envia el id que se va a editar
-            //newUser.setId(2);                        
+            
+            newProd.setId(product.getId());                        
             newProd.setTitulo(product.getTitulo());
             newProd.setDescripcion(product.getDescripcion());
             newProd.setValor(product.getValor());
@@ -51,4 +53,11 @@ public class ProductController {
             
             return "Success";
     }
+    @PostMapping("/deleteProduct")
+    public String delete(@RequestParam(value="id") int id){
+       Producto product =  this.productRepository.findById(id);
+       productRepository.delete(product);
+       return "Deleted succesfully";
+    }
+    
 }

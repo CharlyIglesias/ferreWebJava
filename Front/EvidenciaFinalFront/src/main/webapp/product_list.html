@@ -16,6 +16,7 @@ and open the template in the editor.
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
     
@@ -27,12 +28,100 @@ and open the template in the editor.
               $('#footer').load("footer.html");
             });
     </script> 
-    <script src="../EvidenciaFinalFront/js/productListJS.js"></script>
+    <script>
+        /* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+ $(document).ready(function () {
+        
+    createTable('All');
+
+    });
+
+    function createTable(status) {
+        if(status == "All") {
+            emptyTableMessage= "You didn't have any products.";
+            table = $('#myTable').DataTable({
+                "ajax":{
+                    "url" : 'http://192.168.1.138:8081/getProductos',
+                    "dataSrc": '', 
+                },
+                
+                "processing": false,
+                "order": [1,'asc'],
+                "language": {
+                    "emptyTable": emptyTableMessage
+                },
+                "columns": [
+                    {"data": "titulo", "searchable": true, "orderable": false},
+                    {"data": "descripcion", "searchable": true, "orderable": false},
+                    {"data": "valor", "searchable": false, "orderable": false},
+                    {"data":"foto_url","orderable": false, "render": function ( data, type, row ) {
+
+                            return '<a target="_blank" href="'+data+'"style="max-width: 75px;"><img src="'+data+'" style="width:50%; max-width: 65px;"></a>';  
+                        // Combine the first and last names into a single table field
+                    } },
+                    {"data": "cantDisponible", "searchable": true, "orderable": false},
+                    {"data":"id","orderable": false, "render": function ( data, type, row ) {
+
+                            return '<a href="../EvidenciaFinalFront/create_product.html?id='+data+'"style="max-width: 75px;">Edit</a>';  
+                        // Combine the first and last names into a single table field
+                    } },
+                    {"data":"id","orderable": false, "render": function ( data, type, row ) {
+
+                        //return '<a  style="max-width: 75px;" onclick="deleteConfirm('+data+')">Delete</a>';  
+                        return '<button type="button" onClick="deleteConfirm('+data+')" class="btn btn-light"><i class="fa fa-trash"></i></button>'
+                        // Combine the first and last names into a single table field
+                    } },
+                ]
+            });
+        }
+    }
+           
+
+    </script>
+    <script>
+    function deleteConfirm(id){
+        idToDelete = id;
+        $('#exampleModalLabel').text("Wait!");
+        $('#exampleModal').modal('show');
+    }
+    function deleteProduct(){
+        console.log(idToDelete);
+        $.ajax({
+            'url': 'http://192.168.1.138:8081/deleteProduct?id='+idToDelete,
+            'type': 'POST',
+            headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+        }
+        }).then(function(data) {
+            console.log("data" + data);
+            $('#exampleModal').modal('hide');
+            table.ajax.reload();
+            //window.location.replace("/EvidenciaFinalFront/product_list.html");
+        }).fail(function(error){
+            console.log("error:" + error);
+            $('#exampleModal').modal('hide');
+            table.ajax.reload();
+            //window.location.replace("/EvidenciaFinalFront/product_list.html");
+        });
+    }
+    </script>
+
     </head>
     <body>
         <div id="includedContent"></div>
+        <div class="col-10" style="margin-bottom: 15px;">
+            <div class="row">
+                <button type="button" style="margin-left: auto;" onclick="location.href = '../EvidenciaFinalFront/create_product.html'" class="btn btn-outline-secondary" data-dismiss="modal">Create New Product</button>
+            </div>
+        </div>
         <div class="row">
-        <div class="col-2"></div>
+        <div class="col-2"><button type="button" class="btn btn-light"><i class="fas fa-trash-alt"></i></button></div>
         <div class="col">
             <table id="myTable" class="table">
                 <thead>
@@ -43,11 +132,33 @@ and open the template in the editor.
                         <th>Image</th>
                         <th>Qty Available</th>
                         <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
             </table>
         </div>
         <div class="col-2"></div>
+        </div>
+        
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Wait!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                Are you sure you want to delete this product?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" onclick="deleteProduct()">Yes, delete it</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+            </div>
         </div>
     </body>
 </html>

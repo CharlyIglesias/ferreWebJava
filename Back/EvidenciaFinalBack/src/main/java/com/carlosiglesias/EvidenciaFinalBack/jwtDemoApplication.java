@@ -59,6 +59,8 @@ public class jwtDemoApplication {
                                 .antMatchers(HttpMethod.GET, "/getProductos").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getPedidos").permitAll()
 				.antMatchers(HttpMethod.POST, "/createProduct").permitAll()
+                                .antMatchers(HttpMethod.GET, "/findProductById").permitAll()
+                                .antMatchers(HttpMethod.POST, "/deleteProduct").permitAll()
 				.anyRequest().authenticated();
 		}
 	}

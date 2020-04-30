@@ -24,11 +24,17 @@ and open the template in the editor.
             .image{
                 max-width: 97%
             }
+            #description{
+                min-height: 38%;
+            }
         }
         
         @media only screen and (min-width: 1591px){
             .image{
                 max-width: 70%
+            }
+            #description{
+                min-height: 31%;
             }
         }
         </style>
@@ -46,21 +52,22 @@ and open the template in the editor.
               $("#includedContent").load("index.html"); 
             });
         </script> 
+        <script src="../EvidenciaFinalFront/js/productDetail.js"></script>
     </head>
     <body>
         <div id="includedContent"></div>
         <div class="row">
             <div class="col-6">
                 <div class="row">
-                    <img class="image" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Logo">
+                    <img class="image" id="blah" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Logo">
                 </div>
             </div>
             <div class="col-6">
-                <p class="font-weight-light" style="font-size:60px">Product Title</p>
+                <p class="font-weight-light" id="title" style="font-size:60px">Product Title</p>
                 <hr class="divider">
-                <p class="font-weight-light" style="font-size:50px">$1232</p>
+                <p class="font-weight-light" id="price" style="font-size:50px">$1232</p>
                 <hr class="divider" >
-                <p class="font-weight-light" style="font-size:15px; max-width: 50%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p class="font-weight-light" id="description" style="font-size:15px; max-width: 50%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <hr class="divider">
                 <button id="button" class="btn btn-lg btn-secondary btn-block" style="max-width: 30%" type="submit">Add to Cart</button>
             </div>
