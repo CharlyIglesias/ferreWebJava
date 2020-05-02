@@ -59,6 +59,8 @@
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+        
+    <script src="../EvidenciaFinalFront/js/homeJS.js"></script>
     </head>
     <body>
 
@@ -95,93 +97,14 @@
 <br>
 <hr style="border-top: 1px solid #e6e6e6">
 <div class="row">
-    <div class="col-4">
-        <a class="nodecored" href="#">
-        <div class="card" style="width: 20rem; height: 26rem; margin: 0px auto;">
-            <img class="card-img-top image" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
-            <hr style="border-top: 1px solid #e6e6e6">
-            <div class="card-body">
-                <h5 class="card-title">PRODUCT TITLE</h5>
-                <p class="font-weight-light centered" style="font-size:17px;">$1232</p>
-            </div>
-          </div>
-        </a>
+    <div class="col-4" id="grandeIzq">
+        <!-- AQUI VA EL PRODUCTO GRANDE DE LA IZQUIERDA QUE SE INSERTA CON JQUERY -->
     </div>
-    <div class="col-4">
-        <div class="row">
-            <a class="nodecored" href="#">
-                <div class="card" style="width: 20rem;height: 13rem;">
-                      <img class="card-img-top imageChiquita" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
-                      <hr style="border-top: 1px solid #e6e6e6">
-                      <div class="card-body body2">
-                          <div class="row">
-                              <div class="col-8">
-                                  <h6 class="card-title">PRODUCT TITLE</h6>
-                              </div>
-                              <div class="col-4">
-                                <p class="font-weight-light centered" style="font-size:17px;">$1232</p>
-                              </div>
-                          </div>
-                      </div>
-                </div>
-            </a>
-        </div>
-        <div class="row">
-            <a class="nodecored" href="#">
-                <div class="card" style="width: 20rem; height: 13rem;">
-                      <img class="card-img-top imageChiquita" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
-                      <hr style="border-top: 1px solid #e6e6e6">
-                      <div class="card-body body2">
-                          <div class="row">
-                              <div class="col-8">
-                                  <h6 class="card-title">PRODUCT TITLE</h6>
-                              </div>
-                              <div class="col-4">
-                                <p class="font-weight-light centered" style="font-size:17px;">$1232</p>
-                              </div>
-                          </div>
-                      </div>
-                </div>
-            </a>
-        </div>
+    <div class="col-4" id="chicoEnmedio">
+        <!-- AQUI VAN LOS PRODUCTOS DE ENMEDIO QUE SE INSERTAN CON JQUERY -->
     </div>
-    <div class="col-4">
-        <div class="row">
-            <a class="nodecored" href="#">
-                <div class="card" style="width: 20rem;height: 13rem; margin: 0px auto;">
-                      <img class="card-img-top imageChiquita" src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" alt="Card image cap">
-                      <hr style="border-top: 1px solid #e6e6e6">
-                      <div class="card-body body2">
-                          <div class="row">
-                              <div class="col-8">
-                                  <h6 class="card-title">PRODUCT TITLE</h6>
-                              </div>
-                              <div class="col-4">
-                                <p class="font-weight-light centered" style="font-size:17px;">$1232</p>
-                              </div>
-                          </div>
-                      </div>
-                </div>
-            </a>
-        </div>
-        <div class="row">
-            <a class="nodecored" href="#">
-                <div class="card" style="width: 20rem; height: 13rem; margin: 0px auto;">
-                      <img class="card-img-top imageChiquita" src="https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" alt="Card image cap">
-                      <hr style="border-top: 1px solid #e6e6e6">
-                      <div class="card-body body2">
-                          <div class="row">
-                              <div class="col-8">
-                                  <h6 class="card-title">PRODUCT TITLE</h6>
-                              </div>
-                              <div class="col-4">
-                                <p class="font-weight-light centered" style="font-size:17px;">$1232</p>
-                              </div>
-                          </div>
-                      </div>
-                </div>
-            </a>
-        </div>
+    <div class="col-4" id="chicoDer">
+        <!-- AQUI VAN LOS PRODUCTOS DE LA DERECHA QUE SE INSERTAN CON JQUERY -->        
     </div>
 </div>
 <br>
@@ -213,7 +136,7 @@
 <hr style="border-top: 1px solid #e6e6e6">
 <div class="row">
     <div class="col-4">
-        <a href="https://goo.gl/maps/PECwJbYsixChqewZA" class="nodecored"><p class="lefted" style="margin-top:5%; max-width:60%">Av. 2 de Abril 2235A, Col. Roma C.P. 64700 Monterrey, Nuevo León, México.</p></a>
+        <a target="blank" href="https://goo.gl/maps/PECwJbYsixChqewZA" class="nodecored"><p class="lefted" style="margin-top:5%; max-width:60%">Av. 2 de Abril 2235A, Col. Roma C.P. 64700 Monterrey, Nuevo León, México.</p></a>
         <p class="lefted">Ferreteria Los Pinos</p>
     </div>
     <div class="col-4">
@@ -225,8 +148,8 @@
     <div class="col-4">
         <p class="lefted">MAIN MENU</p>
         <a href="#" class="nodecored"><p class="lefted" style="margin-bottom: 1%;">Home</p></a>
-        <a href="#" class="nodecored"><p class="lefted" style="margin-bottom: 1%;">Shop</p></a>
-        <a href="#" class="nodecored"><p class="lefted" style="margin-bottom: 1%;">Help</p></a>
+        <a href="../EvidenciaFinalFront/shop_page.html" class="nodecored"><p class="lefted" style="margin-bottom: 1%;">Shop</p></a>
+        <a href="../EvidenciaFinalFront/login.html" class="nodecored"><p class="lefted" style="margin-bottom: 1%;">Login</p></a>
     </div>
 </div>
 <br>
