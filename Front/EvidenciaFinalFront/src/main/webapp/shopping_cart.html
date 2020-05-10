@@ -39,6 +39,8 @@ and open the template in the editor.
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
     <script> 
             $(function(){
               $("#includedContent").load("index.html");
@@ -70,70 +72,34 @@ and open the template in the editor.
             
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">
             
-            <div class="card-columns" style="margin-left: 26.8%">
-                    <a class="nodecored" href="#">
-                       <div class="card mb-3 tarjetas">
-                        <div class="row no-gutters">
-                          <div class="col-md-5">
-                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
-                          </div>
-                          <div class="col-md-7">
-                            <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">A very nice product</p>
-                              <p class="card-text">$1232</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="nodecored" href="#">
-                       <div class="card mb-3 tarjetas">
-                        <div class="row no-gutters">
-                          <div class="col-md-5">
-                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
-                          </div>
-                          <div class="col-md-7">
-                            <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">A very nice product</p>
-                              <p class="card-text">$1232</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
+            <div style="margin-left: 26.8%" width="73%">
+                <table id="myTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Qty</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
         <div class="col-4">
             <p class="font-weight-light" style="font-size:33px; text-align: left;">Summary</p>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" style="width:75%; font-weight: bold" placeholder="ENTER COUPON CODE">
-                <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
-              </form>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
             <div class="row">
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">SUBTOTAL</p>
-                    </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">SHIPPING</p>
-                    </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">TAXES</p>
+                        <p class="font-weight-light lefted" style="font-size: 23px">SUBTOTAL</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
-                    </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
-                    </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                        <p class="font-weight-light lefted" style="font-size: 23px" id="subtotal"></p>
                     </div>
                 </div>
             </div>
@@ -147,7 +113,7 @@ and open the template in the editor.
                 </div>
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-bold lefted" style="font-size: 23px">$1232</p>
+                    <p class="font-weight-bold lefted" style="font-size: 23px" id="total"></p>
                     </div>
                 </div>
             </div>
@@ -157,11 +123,88 @@ and open the template in the editor.
         <br>
         <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">
         <div class="row" style="margin-left:18%">
-            <button class="btn btn-secondary my-2 my-sm-0 grandes" type="submit">Next</button>
-            <button class="btn btn-outline-secondary my-2 my-sm-0 grandes" style="margin-left: 2%" type="submit">Cancel</button>
+            <a href="shipping.html"><button class="btn btn-secondary my-2 my-sm-0 grandes" type="submit">Next</button></a>
         </div>
         <br>
         <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">
         <div id="footer"></div>
     </body>
+    <script>
+        /* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+    var table;
+    $(document).ready(function () {
+        
+        createTable('All');
+
+    });
+
+    function createTable(status) {
+        emptyTableMessage= "You don't have any products.";
+            table = $('#myTable').DataTable({
+                "ajax":{
+                    "url" : 'http://localhost:8081/getCart?cartToken='+sessionStorage.getItem("cartToken"),
+                    "dataSrc": '', 
+                },
+                "paging": false,
+                "info": false,
+                "searching": false,
+                "order": [1,'asc'],
+                "language": {
+                    "emptyTable": emptyTableMessage
+                },
+                "columns": [
+                    {"data": "producto.titulo", "searchable": true, "orderable": false},
+                    {"data": "producto.descripcion", "searchable": true, "orderable": false},
+                    {"data": "producto.valor", "searchable": false, "orderable": false, "render": function(data){
+                            return "$"+data;
+                    }},
+                    {"data": "producto.foto_url","orderable": false, "render": function ( data, type, row ) {
+
+                            return '<a target="_blank" href="'+data+'"style="max-width: 75px;"><img src="'+data+'" style="width:50%; max-width: 65px;"></a>';  
+                        // Combine the first and last names into a single table field
+                    } },
+                    {"data": "cantidad", "searchable": true, "orderable": false, "render": function(data, type, row){
+                            return "<input onfocusout='changeQuantity("+row.producto.id+");' type='number' min='1' max='100' class='quantity-product-"+row.producto.id+"' value='"+data+"'></input>"
+                    }},
+                    {"data": "producto.id", "searchable": true, "orderable": false, "render": function(data, full){
+                            return "<button class='btn btn-danger delete-product-"+data+"' onClick='deleteAction("+data+");'>Delete</button>"
+                    }},
+                ],
+            });
+            
+            table.on( 'xhr', function () {
+                var json = table.ajax.json();
+                var JsonData = json;
+                var options = "<option value='{{ user.id }}'>Me</option>";
+                var total = 0;
+                JsonData.forEach(index =>{
+                   total += index.producto.valor * index.cantidad;
+                });
+                $("#subtotal").html("$ "+total);
+                $("#total").html("$ "+total);
+            });
+    }
+    
+    function deleteAction(productId){
+        $.post("http://localhost:8081/deleteFromCart", {productId, "cartToken": sessionStorage.getItem("cartToken")}, function(data){
+            alert("Product deleted from cart");
+            $(".delete-product-"+productId).closest("tr").remove();
+        });
+    }
+    
+    function changeQuantity(productId){
+        $.post("http://localhost:8081/changeQuantity", {productId, "cartToken": sessionStorage.getItem("cartToken"), "quantity": $(".quantity-product-"+productId).val()}, function(data){
+            console.log($(".quantity-product-"+productId).val());
+        });
+    }
+    
+    
+    
+           
+
+    </script>
 </html>

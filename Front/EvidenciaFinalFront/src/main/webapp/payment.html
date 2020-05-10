@@ -37,6 +37,10 @@ and open the template in the editor.
             max-width: 44%;
         }
 
+        #exp-invalid{
+            color: red;
+            display:none;
+        }
 
     </style>
         
@@ -48,11 +52,109 @@ and open the template in the editor.
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
-    <script> 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+        <script> 
+            var subtotal = 0;
             $(function(){
               $("#includedContent").load("index.html");
               $('#footer').load("footer.html");
             });
+            
+            $(document).ready(function () {
+                createTable('All');
+            });
+
+            function createTable(status) {
+                emptyTableMessage= "You don't have any products.";
+                    table = $('#myTable').DataTable({
+                        "ajax":{
+                            "url" : 'http://localhost:8081/getCart?cartToken='+sessionStorage.getItem("cartToken"),
+                            "dataSrc": '', 
+                        },
+                        "paging": false,
+                        "info": false,
+                        "searching": false,
+                        "order": [1,'asc'],
+                        "language": {
+                            "emptyTable": emptyTableMessage
+                        },
+                        "columns": [
+                            {"data": "producto.titulo", "searchable": true, "orderable": false},
+                            {"data": "producto.descripcion", "searchable": true, "orderable": false},
+                            {"data": "producto.valor", "searchable": false, "orderable": false, "render": function(data){
+                                    return "$"+data;
+                            }},
+                            {"data": "cantidad", "searchable": true, "orderable": false},
+                            {"data": "producto.id", "searchable": true, "orderable": false, "render": function(data, type, row){
+                                    var price = 0;
+                                    price = row.producto.valor * row.cantidad;
+                                    return "$"+price;
+                            }},
+                        ],
+                    });
+
+                    table.on( 'xhr', function () {
+                        var json = table.ajax.json();
+                        var JsonData = json;
+                        var envioFee = 0;
+                        var options = "<option value='{{ user.id }}'>Me</option>";
+                        JsonData.forEach(index =>{
+                           subtotal += index.producto.valor * index.cantidad;
+                           envioFee = index.carrito.envio.price;
+                        });
+                        $("#subtotal").html("$"+subtotal);
+                        //$("#total").html("$"+subtotal);
+                        $("#shipping-fee").html((envioFee == 0) ? "FREE" : "$"+envioFee);
+                        var totalPrice = parseFloat(subtotal) + parseFloat(envioFee);
+                        console.log(totalPrice);
+                        $("#total").html("$"+totalPrice);
+                    });
+            }
+            
+            
+            $(document).on('keypress paste keyup','[id=cardNumber]',function(){
+                var key = event.keyCode || event.charCode;
+                if( key == 8 || key == 46 )
+                    return false;
+                if($(this).val().length == 4 || $(this).val().length == 9 || $(this).val().length == 14) {
+                    $(this).val($(this).val()+" ");
+                    focus = false;
+                }
+
+            });
+            $(document).on('keypress paste keyup','[id=cardExpiration]',function(){
+                var key = event.keyCode || event.charCode;
+                if( key == 8 || key == 46 )
+                    return false;
+
+                if($(this).val().length === 2) {
+                    $(this).val($(this).val()+"/");
+                    focus = false;
+                }
+
+
+                if($(this).val().length > 4){
+                    month = $(this).val().slice(0, 2);
+                    year =  20+$(this).val().slice(3,6);
+                    var today = new Date();
+                    var actual = today.getFullYear();
+                     if(month > 12 || year< actual){
+                        $('#exp-invalid').show();
+                     }else{
+                        $('#exp-invalid').hide();
+                    }
+                }
+
+            });
+            
+            function createPedido(){
+                $.post("http://localhost:8081/createPedido", {cartToken: sessionStorage.getItem("cartToken")}, function(){
+                    alert("Order Made Successfully");
+                    sessionStorage.setItem("cartToken", null);
+                    window.location.replace("/EvidenciaFinalFront/home.html");
+                });
+            }
         </script> 
     </head>
     <body>
@@ -89,20 +191,20 @@ and open the template in the editor.
 
               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                 <p class="font-weight-light centered" style="font-size:14px;">We'll charge like $500 just because we can.</p>
                  <form class="form">
                     <div class="row" style="margin-top: 20px">
                         <div class="col-6">
-                          <input type="text" class="form-control" placeholder="Card Number">
+                          <input type="text" class="form-control" placeholder="Card Number" maxlength="19" id="cardNumber">
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="CVV">
+                          <input type="text" class="form-control" placeholder="CVV" maxlength="3" id="cvv">
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="MM/YY">
+                          <input type="text" class="form-control" placeholder="MM/YY" maxlength="5" id="cardExpiration">
+                          <div id="exp-invalid" class="row" ><i class="fas fa-exclamation-triangle"></i> Invalid expiration date </div>
                         </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="Card Holder Name">
+                    <input type="text" class="form-control" placeholder="Card Holder Name" id="cardHolder">
                  </form>
                 </div>
               </div>
@@ -119,7 +221,6 @@ and open the template in the editor.
                 <div class="card-body">
                  <p class="font-weight-light centered" style="font-size:14px;">Nice try, but we do not accept PayPal (by now).</p>
                  <p class="font-weight-light centered" style="font-size:14px;">Try with Credit Card instead.</p>
-                
                 </div>
               </div>
             </div>
@@ -128,28 +229,17 @@ and open the template in the editor.
         <div class="col-4">
             <p class="font-weight-light" style="font-size:33px; text-align: left;">Summary</p>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
-                <div class="card-columns">
-                    <a class="nodecored" href="#">
-                       <div class="card mb-3 tarjetas">
-                        <div class="row no-gutters">
-                          <div class="col-md-5">
-                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
-                          </div>
-                          <div class="col-md-7">
-                            <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">$1232</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-            </div>
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" style="width:75%; font-weight: bold" placeholder="ENTER COUPON CODE">
-                <button class="btn btn-secondary" style="margin-bottom:15px" type="submit"><i class="fa fa-search"></i></button>
-              </form>
+                <table id="myTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                </table>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
             <div class="row">
                 <div class="col-6">
@@ -159,19 +249,13 @@ and open the template in the editor.
                     <div class="row">
                     <p class="font-weight-light lefted" style="font-size: 23px">SHIPPING</p>
                     </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">TAXES</p>
-                    </div>
                 </div>
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                        <p class="font-weight-light lefted" style="font-size: 23px" id="subtotal">20</p>
                     </div>
                     <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
-                    </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                        <p class="font-weight-light lefted" style="font-size: 23px" id="shipping-fee">FREE</p>
                     </div>
                     
                 </div>
@@ -185,7 +269,7 @@ and open the template in the editor.
                 </div>
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-bold lefted" style="font-size: 23px">$1232</p>
+                    <p class="font-weight-bold lefted" style="font-size: 23px" id="total">$1232</p>
                     </div>
                 </div>
             </div>
@@ -193,8 +277,8 @@ and open the template in the editor.
         </div>
         <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 100%">
         <div class="row" style="margin-left:18%">
-            <button class="btn btn-secondary my-2 my-sm-0 grandes" type="submit">Pay</button>
-            <button class="btn btn-outline-secondary my-2 my-sm-0 grandes" style="margin-left: 2%" type="submit">Cancel</button>
+            <button class="btn btn-outline-secondary my-2 my-sm-0 grandes" style="margin-right: 2%" type="submit">Cancel</button>
+            <button class="btn btn-secondary my-2 my-sm-0 grandes" onClick="createPedido()">Pay</button>
         </div>
         <br>
         <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">

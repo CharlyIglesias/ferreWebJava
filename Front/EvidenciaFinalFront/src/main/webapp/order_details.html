@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <style>
+
+    </style>
+
+        <title>Product List</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+    
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+        <script> 
+            $(function(){
+              $("#includedContent").load("index.html");
+              $('#footer').load("footer.html");
+            });
+    </script> 
+    <script>
+        /* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+var shipping = 0;
+var subtotal = 0;
+var total = 0;
+    
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === "" ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+    
+    $.get("http://localhost:8081/getPedido", {pedidoId: getUrlParameter("pedidoId")}, function(data){
+            $("#order-date").html(data.fecha);
+            $("#order-first-name").html(data.carrito.envio.firstName);
+            $("#order-last-name").html(data.carrito.envio.lastName);
+            $("#order-address").html(data.carrito.envio.address);
+            $("#order-email").html(data.carrito.envio.emailAddress);
+            $("#order-country").html(data.carrito.envio.country);
+            $("#order-city").html(data.carrito.envio.city);
+            $("#order-zip").html(data.carrito.envio.zip);
+            $("#order-phone").html(data.carrito.envio.phone);
+            $("#order-price").html((data.carrito.envio.price == "0") ? "Free" : "Priority");
+            console.log(data.carrito.envio.price);
+            shippíng = data.carrito.envio.price;
+            $("#shipping").html("$"+parseFloat(shipping));
+            var table = $('#myTable').DataTable({
+                        "ajax":{
+                            "url" : 'http://localhost:8081/getCart?cartToken='+data.carrito.token,
+                            "dataSrc": '', 
+                        },
+                        "paging": false,
+                        "info": false,
+                        "searching": false,
+                        "order": [1,'asc'],
+                        "language": {
+                            "emptyTable": "No Products"
+                        },
+                        "columns": [
+                            {"data": "producto.titulo", "searchable": true, "orderable": false},
+                            {"data": "producto.descripcion", "searchable": true, "orderable": false},
+                            {"data": "producto.valor", "searchable": false, "orderable": false, "render": function(data){
+                                    return "$"+data;
+                            }},
+                            {"data": "cantidad", "searchable": true, "orderable": false},
+                            {"data": "producto.id", "searchable": true, "orderable": false, "render": function(data, type, row){
+                                    var price = 0;
+                                    price = row.producto.valor * row.cantidad;
+                                    return "$"+price;
+                            }},
+                        ],
+                    });
+                    
+                    table.on( 'xhr', function () {
+                        var json = table.ajax.json();
+                        var JsonData = json;
+                        JsonData.forEach(index =>{
+                           subtotal += index.producto.valor * index.cantidad;
+                        });
+                        console.log(subtotal);
+                        $("#subtotal").html("$"+(subtotal));
+                        $("#total").html("$"+(parseFloat(subtotal) + parseFloat(shipping)));
+                    });
+    });
+           
+
+    </script>
+
+    </head>
+    <body>
+        <div id="includedContent"></div>
+        <div class="row">
+        <div class="col-2"><button type="button" class="btn btn-light"><i class="fas fa-trash-alt"></i></button></div>
+        <div class="col">
+            <p><b>Date:</b> <span id="order-date"></span></p>
+            <h3 class="mt-5">Shipping</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><b>First Name:</b> <span id='order-first-name'></span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Last Name:</b> <span id='order-last-name'></span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Email Address:</b> <span id='order-email'></span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Phone:</b> <span id='order-phone'></span></p>
+                </div>
+                <div class="col-md-12">
+                    <p><b>Address:</b> <span id='order-address'></span></p>
+                </div>
+                <div class="col-md-4">
+                    <p><b>Country:</b> <span id='order-country'></span></p>
+                </div>
+                <div class="col-md-4">
+                    <p><b>City:</b> <span id='order-city'></span></p>
+                </div>
+                <div class="col-md-4">
+                    <p><b>Zip:</b> <span id='order-zip'></span></p>
+                </div>
+                <div class="col-md-12">
+                    <p><b>Type</b> <span id='order-price'></span></p>
+                </div>
+            </div>
+            
+            <table id="myTable" class="table mt-4">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <p class="font-weight-light lefted" style="font-size: 23px">SUBTOTAL</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="font-weight-light lefted" style="font-size: 23px" id="subtotal">20</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="font-weight-light lefted" style="font-size: 23px">SHIPPING</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="font-weight-light lefted" style="font-size: 23px" id="shipping">20</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="font-weight-light lefted" style="font-size: 23px">TOTAL</p>
+                </div><div class="col-md-6">
+                    <p class="font-weight-light lefted" style="font-size: 23px"  id="total">40</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-2"></div>
+        </div>
+    </body>
+</html>

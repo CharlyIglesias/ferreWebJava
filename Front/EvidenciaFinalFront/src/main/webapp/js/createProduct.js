@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 if(id !== undefined){
   $.ajax({
-      'url': 'http://192.168.1.138:8081/findProductById?id='+id,
+      'url': 'http://localhost:8081/findProductById?id='+id,
       'type': 'GET',
       headers: { 
       'Accept': 'application/json',
@@ -81,7 +81,7 @@ $("#button").click(function(event){
   }
   
   $.ajax({
-      'url': 'http://192.168.1.138:8081/createProduct',
+      'url': 'http://localhost:8081/createProduct',
       'type': 'POST',
       'data': JSON.stringify(data),
       headers: { 

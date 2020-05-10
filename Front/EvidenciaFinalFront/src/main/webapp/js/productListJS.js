@@ -15,7 +15,7 @@
             emptyTableMessage= "You didn't have any products.";
             table = $('#myTable').DataTable({
                 "ajax":{
-                    "url" : 'http://192.168.1.138:8081/getProductos',
+                    "url" : 'http://localhost:8081/getProductos',
                     "dataSrc": '', 
                 },
                 

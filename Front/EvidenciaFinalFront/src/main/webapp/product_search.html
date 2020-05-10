@@ -83,59 +83,26 @@ and open the template in the editor.
                     {"data": "cantDisponible", "searchable": true, "orderable": false},
                     {"data":"id","orderable": false, "render": function ( data, type, row ) {
 
-                            return '<a href="../EvidenciaFinalFront/create_product.html?id='+data+'"style="max-width: 75px;">Edit</a>';  
-                        // Combine the first and last names into a single table field
-                    } },
-                    {"data":"id","orderable": false, "render": function ( data, type, row ) {
-
-                        //return '<a  style="max-width: 75px;" onclick="deleteConfirm('+data+')">Delete</a>';  
-                        return '<button type="button" onClick="deleteConfirm('+data+')" class="btn btn-light"><i class="fa fa-trash"></i></button>'
+                            return '<button class="btn btn-success" onClick="addToCart('+data+');">Add</button>';  
                         // Combine the first and last names into a single table field
                     } },
                 ]
             });
         }
     }
-           
-
-    </script>
-    <script>
-    function deleteConfirm(id){
-        idToDelete = id;
-        $('#exampleModalLabel').text("Wait!");
-        $('#exampleModal').modal('show');
-    }
-    function deleteProduct(){
-        console.log(idToDelete);
-        $.ajax({
-            'url': 'http://localhost:8081/deleteProduct?id='+idToDelete,
-            'type': 'POST',
-            headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-        }
-        }).then(function(data) {
-            console.log("data" + data);
-            $('#exampleModal').modal('hide');
-            table.ajax.reload();
-            //window.location.replace("/EvidenciaFinalFront/product_list.html");
-        }).fail(function(error){
-            console.log("error:" + error);
-            $('#exampleModal').modal('hide');
-            table.ajax.reload();
-            //window.location.replace("/EvidenciaFinalFront/product_list.html");
+    
+    function addToCart(productId){
+        $.post("http://localhost:8081/addProductToCart", {"productId": productId, "cartToken": sessionStorage.getItem("cartToken")}, function(data){
+           sessionStorage.setItem("cartToken", data);
         });
     }
+           
+
     </script>
 
     </head>
     <body>
         <div id="includedContent"></div>
-        <div class="col-10" style="margin-bottom: 15px;">
-            <div class="row">
-                <button type="button" style="margin-left: auto;" onclick="location.href = '../EvidenciaFinalFront/create_product.html'" class="btn btn-outline-secondary" data-dismiss="modal">Create New Product</button>
-            </div>
-        </div>
         <div class="row">
         <div class="col-2"><button type="button" class="btn btn-light"><i class="fas fa-trash-alt"></i></button></div>
         <div class="col">
@@ -147,8 +114,7 @@ and open the template in the editor.
                         <th>Price</th>
                         <th>Image</th>
                         <th>Qty Available</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Add To Cart</th>
                     </tr>
                 </thead>
             </table>

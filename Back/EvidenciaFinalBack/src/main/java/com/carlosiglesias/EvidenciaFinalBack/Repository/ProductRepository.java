@@ -19,4 +19,8 @@ public interface ProductRepository extends CrudRepository<Producto, Integer>{
     
     List<Producto> findAll();
     
+    List<Producto> findByTituloContains(String title);
+    
+    List<Producto> findByDescripcionContains(String descripcion);
+    
 }

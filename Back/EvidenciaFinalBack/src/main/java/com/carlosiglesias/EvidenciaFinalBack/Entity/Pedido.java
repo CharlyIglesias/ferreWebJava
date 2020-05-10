@@ -5,10 +5,12 @@
  */
 package com.carlosiglesias.EvidenciaFinalBack.Entity;
 
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,16 +22,15 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String fecha;
-    private double total;
-    private double iva;
-    private double subtotal;
+    private Timestamp fecha;
+    
+    @ManyToOne
+    private Carrito carrito;
     
     public Pedido(){}
     
     public Pedido(int id, double total){
         this.id = id;
-        this.total = total;
     }
 
     public int getId() {
@@ -40,36 +41,20 @@ public class Pedido {
         this.id = id;
     }
 
-    public String getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 
-    public double getTotal() {
-        return total;
+    public Carrito getCarrito() {
+        return carrito;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public double getIva() {
-        return iva;
-    }
-
-    public void setIva(double iva) {
-        this.iva = iva;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+    public void setCarrito(Carrito carrrito) {
+        this.carrito = carrrito;
     }
  
 }

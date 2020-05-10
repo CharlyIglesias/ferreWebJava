@@ -29,7 +29,7 @@ $(document).ready(function() {
     
 if(id !== undefined){
     $.ajax({
-        'url': 'http://192.168.1.138:8081/findProductById?id='+id,
+        'url': 'http://getProductos:8081/findProductById?id='+id,
         'type': 'GET',
         headers: { 
         'Accept': 'application/json',

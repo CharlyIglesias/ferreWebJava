@@ -220,12 +220,118 @@ mark{
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
-    <script> 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+        <script> 
             $(function(){
               $("#includedContent").load("index.html");
               $('#footer').load("footer.html");
             });
         </script> 
+        <script>
+            var table;
+            var shippingPrice = 0;
+            var totalPrice = 0;
+            var subtotal = 0;
+            $(document).ready(function () {
+                createTable('All');
+            });
+
+            function createTable(status) {
+                emptyTableMessage= "You don't have any products.";
+                    table = $('#myTable').DataTable({
+                        "ajax":{
+                            "url" : 'http://localhost:8081/getCart?cartToken='+sessionStorage.getItem("cartToken"),
+                            "dataSrc": '', 
+                        },
+                        "paging": false,
+                        "info": false,
+                        "searching": false,
+                        "order": [1,'asc'],
+                        "language": {
+                            "emptyTable": emptyTableMessage
+                        },
+                        "columns": [
+                            {"data": "producto.titulo", "searchable": true, "orderable": false},
+                            {"data": "producto.descripcion", "searchable": true, "orderable": false},
+                            {"data": "producto.valor", "searchable": false, "orderable": false, "render": function(data){
+                                    return "$"+data;
+                            }},
+                            {"data": "cantidad", "searchable": true, "orderable": false},
+                            {"data": "producto.id", "searchable": true, "orderable": false, "render": function(data, type, row){
+                                    var price = 0;
+                                    price = row.producto.valor * row.cantidad;
+                                    return "$"+price;
+                            }},
+                        ],
+                    });
+
+                    table.on( 'xhr', function () {
+                        var json = table.ajax.json();
+                        var JsonData = json;
+                        JsonData.forEach(index =>{
+                           subtotal += index.producto.valor * index.cantidad;
+                        });
+                        $("#subtotal").html("$"+subtotal);
+                        $("#total").html("$"+subtotal);
+                    });
+            }
+    
+    
+    $('input[type=radio]').change(function() {
+        shippingPrice = this.value;
+        $("#shipping-fee").html((shippingPrice == 0) ? "FREE" : "$"+shippingPrice);
+        totalPrice = parseFloat(shippingPrice) + parseFloat(subtotal);
+        $("#total").html("$"+totalPrice);
+
+    });
+    
+    function subtmitForm(){
+        var firstName = $("input[name=first-name]").val();
+        var lastName = $("input[name=last-name]").val();
+        var address = $("input[name=address]").val();
+        var emailAddress = $("input[name=email]").val();
+        var country = $("#country").val();
+        console.log(country);
+        var city = $("input[name=city]").val();
+        var zip = $("input[name=zip]").val();
+        var phone = $("input[name=phone]").val();
+        var price = shippingPrice;
+        var token = sessionStorage.getItem("cartToken");
+        
+        if(firstName == "" || lastName == "" || address == "" || emailAddress == "" || country == "" || city == "" || zip == "" || phone == "" || price == "" || token == ""){
+            alert("Please check all the information");
+            return;
+        }
+        
+        var data = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "address": address,
+            "emailAddress": emailAddress,
+            "country": country,
+            "city": city,
+            "zip": zip,
+            "phone": phone,
+            "price": price,
+            "token": token
+        };
+        
+        $.ajax({
+            'url': 'http://localhost:8081/addShipping',
+            'type': 'POST',
+            'data': JSON.stringify(data),
+            headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+        }
+        }).done(function(data) {
+           console.log("data" + data);
+           window.location.replace("/EvidenciaFinalFront/payment.html");
+        });
+           window.location.replace("/EvidenciaFinalFront/payment.html");
+    }
+    </script>
     </head>
     <body>
         <div id="includedContent"></div>
@@ -252,17 +358,17 @@ mark{
         <form class="form" style="margin-left:22%; margin-right: 16%;">
             <div class="row" style="margin-top: 20px">
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="First name">
+                  <input type="text" class="form-control" placeholder="First name" name="first-name">
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Last name">
+                  <input type="text" class="form-control" placeholder="Last name"  name="last-name">
                 </div>
             </div>
-            <input type="text" class="form-control" placeholder="Address">
-            <input type="text" class="form-control" placeholder="Email Address">
+            <input type="text" class="form-control" placeholder="Address"  name="address">
+            <input type="text" class="form-control" placeholder="Email Address"  name="email">
             <div class="row">
                 <div class="col">
-                  <select class="custom-select">
+                  <select class="custom-select" name="country" id="country">
                     <option selected>Country</option>
                     <option value="MX">México</option>
                     <option value="US">United States</option>
@@ -270,26 +376,26 @@ mark{
                   </select>
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="City">
+                  <input type="text" class="form-control" placeholder="City"  name="city">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Zip/Postal Code">
+                    <input type="text" class="form-control" placeholder="Zip/Postal Code"  name="zip">
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Phone Number">
+                  <input type="text" class="form-control" placeholder="Phone Number"  name="phone">
                 </div>
             </div>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 10px; width: 66%">
             
             
             <div class="col-12 pb-5" style="margin-left:7%">
-                <input class="checkbox-tools" type="radio" name="tools" id="tool-1" checked>
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-1" checked value="0">
                 <label class="for-checkbox-tools" for="tool-1">
                         Free Shipping (2-5 working days)
-                </label><!--
-                --><input class="checkbox-tools" type="radio" name="tools" id="tool-2">
+                </label>
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-2" value="20">
                 <label class="for-checkbox-tools" for="tool-2">
                         Next Day Delivery - $20
                 </label>
@@ -302,28 +408,17 @@ mark{
         <div class="col-4">
             <p class="font-weight-light" style="font-size:33px; text-align: left;">Summary</p>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
-                <div class="card-columns">
-                    <a class="nodecored" href="#">
-                       <div class="card mb-3 tarjetas">
-                        <div class="row no-gutters">
-                          <div class="col-md-5">
-                            <img  src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587145568/elmbox6csxnou7qmjx0e.jpg" class="card-img" alt="...">
-                          </div>
-                          <div class="col-md-7">
-                            <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">$1232</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-            </div>
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" style="width:75%; font-weight: bold" placeholder="ENTER COUPON CODE">
-                <button class="btn btn-secondary" style="margin-bottom:15px" type="submit"><i class="fa fa-search"></i></button>
-              </form>
+            <table id="myTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+            </table>
             <hr style="border-top: 1px solid #e6e6e6; margin-top: 1rem; width: 100%">
             <div class="row">
                 <div class="col-6">
@@ -333,19 +428,13 @@ mark{
                     <div class="row">
                     <p class="font-weight-light lefted" style="font-size: 23px">SHIPPING</p>
                     </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">TAXES</p>
-                    </div>
                 </div>
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                        <p class="font-weight-light lefted" style="font-size: 23px" id="subtotal">20</p>
                     </div>
                     <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
-                    </div>
-                    <div class="row">
-                    <p class="font-weight-light lefted" style="font-size: 23px">$1232</p>
+                        <p class="font-weight-light lefted" style="font-size: 23px" id="shipping-fee">FREE</p>
                     </div>
                     
                 </div>
@@ -359,7 +448,7 @@ mark{
                 </div>
                 <div class="col-6">
                     <div class="row">
-                    <p class="font-weight-bold lefted" style="font-size: 23px">$1232</p>
+                    <p class="font-weight-bold lefted" style="font-size: 23px" id="total"></p>
                     </div>
                 </div>
             </div>
@@ -367,8 +456,8 @@ mark{
         </div>
         <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 100%">
         <div class="row" style="margin-left:18%">
-            <button class="btn btn-secondary my-2 my-sm-0 grandes" type="submit">Next</button>
-            <button class="btn btn-outline-secondary my-2 my-sm-0 grandes" style="margin-left: 2%" type="submit">Cancel</button>
+            <a href="shopping_cart.html" style="margin-right: 2%"><button class="btn btn-outline-secondary my-2 my-sm-0 grandes" type="submit">Back</button></a>
+            <button class="btn btn-secondary my-2 my-sm-0 grandes" onClick="subtmitForm();">Next</button>
         </div>
         <br>
         <hr style="border-top: 1px solid #e6e6e6; margin-top: 0px; width: 66%">

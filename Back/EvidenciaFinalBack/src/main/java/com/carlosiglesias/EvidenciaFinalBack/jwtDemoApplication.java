@@ -7,6 +7,9 @@ package com.carlosiglesias.EvidenciaFinalBack;
 
 import com.carlosiglesias.EvidenciaFinalBack.Security.JWTAuthorizationFilter;
 import java.util.Collections;
+import javax.persistence.EntityManagerFactory;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -58,9 +61,16 @@ public class jwtDemoApplication {
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getProductos").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getPedidos").permitAll()
+                                .antMatchers(HttpMethod.GET, "/getPedido").permitAll()
 				.antMatchers(HttpMethod.POST, "/createProduct").permitAll()
                                 .antMatchers(HttpMethod.GET, "/findProductById").permitAll()
                                 .antMatchers(HttpMethod.POST, "/deleteProduct").permitAll()
+                                .antMatchers(HttpMethod.POST, "/addProductToCart").permitAll()
+                                .antMatchers(HttpMethod.GET, "/getCart").permitAll()
+                                .antMatchers(HttpMethod.POST, "/deleteFromCart").permitAll()
+                                .antMatchers(HttpMethod.POST, "/changeQuantity").permitAll()
+                                .antMatchers(HttpMethod.POST, "/addShipping").permitAll()
+                                .antMatchers(HttpMethod.POST, "/createPedido").permitAll()
 				.anyRequest().authenticated();
 		}
 	}
