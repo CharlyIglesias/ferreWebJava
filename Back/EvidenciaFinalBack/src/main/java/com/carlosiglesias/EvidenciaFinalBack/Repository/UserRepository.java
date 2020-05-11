@@ -13,11 +13,9 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Carlos Iglesias
  */
-public class UsersRepository {
-    public interface UserRepository extends CrudRepository<Users, Integer> {
+public interface UserRepository extends CrudRepository<Users, Integer> {
     
     Users findByEmail(String email);
     
     List<Users> findAll();
-}
 }

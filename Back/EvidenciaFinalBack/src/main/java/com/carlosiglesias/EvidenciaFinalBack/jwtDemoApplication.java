@@ -71,6 +71,7 @@ public class jwtDemoApplication {
                                 .antMatchers(HttpMethod.POST, "/changeQuantity").permitAll()
                                 .antMatchers(HttpMethod.POST, "/addShipping").permitAll()
                                 .antMatchers(HttpMethod.POST, "/createPedido").permitAll()
+                                .antMatchers(HttpMethod.POST, "/register").permitAll()
 				.anyRequest().authenticated();
 		}
 	}
