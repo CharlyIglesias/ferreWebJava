@@ -235,6 +235,13 @@ mark{
             var subtotal = 0;
             $(document).ready(function () {
                 createTable('All');
+                $('input[type=radio]').change(function() {
+                    shippingPrice = this.value;
+                    $("#shipping-fee").html((shippingPrice == 0) ? "FREE" : "$"+shippingPrice);
+                    totalPrice = parseFloat(shippingPrice) + parseFloat(subtotal);
+                    $("#total").html("$"+totalPrice);
+
+                });
             });
 
             function createTable(status) {
@@ -278,13 +285,7 @@ mark{
             }
     
     
-    $('input[type=radio]').change(function() {
-        shippingPrice = this.value;
-        $("#shipping-fee").html((shippingPrice == 0) ? "FREE" : "$"+shippingPrice);
-        totalPrice = parseFloat(shippingPrice) + parseFloat(subtotal);
-        $("#total").html("$"+totalPrice);
-
-    });
+    
     
     function subtmitForm(){
         var firstName = $("input[name=first-name]").val();
@@ -295,11 +296,11 @@ mark{
         console.log(country);
         var city = $("input[name=city]").val();
         var zip = $("input[name=zip]").val();
-        var phone = $("input[name=phone]").val();
-        var price = shippingPrice;
+        var phone = $("input[name=phone]").val()
         var token = sessionStorage.getItem("cartToken");
+        console.log(shippingPrice);
         
-        if(firstName == "" || lastName == "" || address == "" || emailAddress == "" || country == "" || city == "" || zip == "" || phone == "" || price == "" || token == ""){
+        if(firstName == "" || lastName == "" || address == "" || emailAddress == "" || country == "" || city == "" || zip == "" || phone == "" || (shippingPrice != 0 && shippingPrice != 20) || token == ""){
             alert("Please check all the information");
             return;
         }
@@ -313,7 +314,7 @@ mark{
             "city": city,
             "zip": zip,
             "phone": phone,
-            "price": price,
+            "price": shippingPrice,
             "token": token
         };
         
