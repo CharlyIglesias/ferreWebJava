@@ -58,7 +58,7 @@ public class jwtDemoApplication {
 			http.csrf().disable()
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
+				.antMatchers(HttpMethod.POST,"/login").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getProductos").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getPedidos").permitAll()
                                 .antMatchers(HttpMethod.GET, "/getPedido").permitAll()

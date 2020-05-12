@@ -85,7 +85,6 @@ $("#button").click(function(event){
       'type': 'POST',
       'data': JSON.stringify(data),
       headers: { 
-      'Accept': 'application/json',
       'Content-Type': 'application/json' 
   }
   }).then(function(data) {

@@ -29,7 +29,7 @@ $(document).ready(function() {
     
 if(id !== undefined){
     $.ajax({
-        'url': 'http://getProductos:8081/findProductById?id='+id,
+        'url': 'http://localhost:8081/findProductById?id='+id,
         'type': 'GET',
         headers: { 
         'Accept': 'application/json',
@@ -51,7 +51,17 @@ if(id !== undefined){
     console.log("Deberia mostrar el glade");
 }
     
-
+ $("#button").click(function(event){
+    addToCart(id);
 });
 
-
+function addToCart(productId){
+    $.post("http://localhost:8081/addProductToCart", {"productId": productId, "cartToken": sessionStorage.getItem("cartToken")}, function(data){
+       sessionStorage.setItem("cartToken", data);
+        showToast();
+    });
+}
+function showToast(){
+        $('.toast').toast('show')
+    }
+});

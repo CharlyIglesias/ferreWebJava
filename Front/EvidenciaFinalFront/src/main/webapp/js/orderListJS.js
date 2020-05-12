@@ -14,7 +14,7 @@ var shippingFee = 0;
            size= 0;
            function createTable(status) {
                 if(status == "All") {
-                    emptyTableMessage= "You didn't have any products.";
+                    emptyTableMessage= "You didn't have any orders.";
                     table = $('#myTable').DataTable({
                         "ajax":{
                             "url" : 'http://localhost:8081/getPedidos',

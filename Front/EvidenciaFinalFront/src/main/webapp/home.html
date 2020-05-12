@@ -61,6 +61,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
         
     <script src="../EvidenciaFinalFront/js/homeJS.js"></script>
+    <script>
+
+      </script>
     </head>
     <body>
 
@@ -73,14 +76,22 @@
     <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
   </form>
   <ul class="navbar-nav alignLeft">
+    <li class="nav-item dropdown admin d-none">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin View
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="../EvidenciaFinalFront/product_list.html">Product List</a>
+          <a class="dropdown-item" href="../EvidenciaFinalFront/orders_list.html">Orders View</a>
+        </div>
+      </li>
     <li class="nav-item">
-      <a class="nav-link" href="../EvidenciaFinalFront/home.html">Home</a>
+      <a class="nav-link" href="../EvidenciaFinalFront/home.html?searchString=">Home</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="../EvidenciaFinalFront/shop_page.html">Shop</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="../EvidenciaFinalFront/login.html">Login</a>
+    <li class="nav-item login">
     </li>
     <li class="nav-item">
         <a href="shopping_cart.html"><button class="btn btn-outline-secondary"><i class="fa fa-shopping-cart"></i> Your Cart</button></a>

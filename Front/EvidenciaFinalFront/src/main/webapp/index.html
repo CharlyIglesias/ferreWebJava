@@ -37,7 +37,10 @@
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
-    
+
+       
+    <script src="../EvidenciaFinalFront/js/index.js"></script>
+        
     </head>
     <body>
 
@@ -46,17 +49,26 @@
     <img src="https://res.cloudinary.com/dtmln7c4k/image/upload/v1587598895/nazaqmjflkddww5onw91.png" alt="Logo" style="width:40px;">
   </a>
     <form class="form-inline" action="product_search.html" method="get">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" name="searchString">
-    <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+    <input class="form-control mr-sm-2 inputazo" type="text" placeholder="Search" name="searchString">
+    <button class="btn btn-secondary botonazo" type="submit"><i class="fa fa-search"></i></button>
   </form>
   <ul class="navbar-nav alignLeft">
+    <li class="nav-item dropdown admin d-none">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Admin View
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="../EvidenciaFinalFront/product_list.html">Product List</a>
+        <a class="dropdown-item" href="../EvidenciaFinalFront/orders_list.html">Orders View</a>
+      </div>
+    </li>
     <li class="nav-item">
-      <a class="nav-link" href="../EvidenciaFinalFront/home.html">Home</a>
+      <a class="nav-link" href="../EvidenciaFinalFront/home.html?searchString=">Home</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="../EvidenciaFinalFront/shop_page.html">Shop</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item login">
       <a class="nav-link" href="../EvidenciaFinalFront/login.html">Login</a>
     </li>
     <li class="nav-item">

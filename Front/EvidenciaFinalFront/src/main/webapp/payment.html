@@ -41,6 +41,13 @@ and open the template in the editor.
             color: red;
             display:none;
         }
+        
+        .inputazo{
+          display: none !important;
+        }
+        .botonazo{
+          display: none !important;
+        }
 
     </style>
         
@@ -152,7 +159,7 @@ and open the template in the editor.
                 $.post("http://localhost:8081/createPedido", {cartToken: sessionStorage.getItem("cartToken")}, function(){
                     alert("Order Made Successfully");
                     sessionStorage.setItem("cartToken", null);
-                    window.location.replace("/EvidenciaFinalFront/home.html");
+                    window.location.replace("/EvidenciaFinalFront/home.html?searchString=");
                 });
             }
         </script> 

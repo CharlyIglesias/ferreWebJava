@@ -5,9 +5,23 @@
  */
 
 $(document).ready(function () {
+
+    var estaLoggeado = sessionStorage.getItem("adminToken");
+    var estaLoggeado2 = sessionStorage.getItem("loginToken");
+    if(estaLoggeado == null && estaLoggeado2 == null){
+      $('.login').html('<a class="nav-link" href="../EvidenciaFinalFront/login.html">Login</a>');
+    }else{
+      $('.login').html('<a class="nav-link" onclick="logout()" href="../EvidenciaFinalFront/login.html">Logout</a>');
+    }
+
+
+    var esAdmin = sessionStorage.getItem("adminToken");
+    if(esAdmin !== null && esAdmin !== "null"){
+      $('.admin').removeClass('d-none');
+    }
         
     $.ajax({
-        'url': 'http://localhost:8081/getProductos',
+        'url': 'http://localhost:8081/getProductos?searchString=',
         'type': 'GET',
         headers: { 
         'Accept': 'application/json',
@@ -26,8 +40,85 @@ $(document).ready(function () {
                    '</div>'+
                  '</div>'+
                '</a>';
+               var html2 = '<div class="row">'+
+               '<a class="nodecored" href="../EvidenciaFinalFront/productDetail.html?id='+data[1]['id']+'">'+
+                   '<div class="card" style="width: 20rem;height: 13rem;">'+
+                         '<img class="card-img-top imageChiquita" src="'+data[1]['foto_url']+'" alt="Card image cap">'+
+                         '<hr style="border-top: 1px solid #e6e6e6">'+
+                         '<div class="card-body body2">'+
+                             '<div class="row">'+
+                                 '<div class="col-8">'+
+                                     '<h6 class="card-title">'+data[1]['titulo']+'</h6>'+
+                                 '</div>'+
+                                 '<div class="col-4">'+
+                                   '<p class="font-weight-light centered" style="font-size:17px;">$'+data[1]['valor']+'</p>'+
+                                 '</div>'+
+                             '</div>'+
+                         '</div>'+
+                   '</div>'+
+               '</a>'+
+           '</div>'+
+           '<div class="row">'+
+               '<a class="nodecored" href="../EvidenciaFinalFront/productDetail.html?id='+data[2]['id']+'">'+
+                   '<div class="card" style="width: 20rem; height: 13rem;">'+
+                         '<img class="card-img-top imageChiquita" src="'+data[2]['foto_url']+'" alt="Card image cap">'+
+                         '<hr style="border-top: 1px solid #e6e6e6">'+
+                         '<div class="card-body body2">'+
+                             '<div class="row">'+
+                                 '<div class="col-8">'+
+                                     '<h6 class="card-title">'+data[2]['titulo']+'</h6>'+
+                                 '</div>'+
+                                 '<div class="col-4">'+
+                                   '<p class="font-weight-light centered" style="font-size:17px;">$'+data[2]['valor']+'</p>'+
+                                 '</div>'+
+                             '</div>'+
+                         '</div>'+
+                   '</div>'+
+               '</a>'+
+           '</div>'
+        
+           var html3 = '<div class="row">'+
+           '<a class="nodecored" href="../EvidenciaFinalFront/productDetail.html?id='+data[3]['id']+'">'+
+               '<div class="card" style="width: 20rem;height: 13rem;">'+
+                     '<img class="card-img-top imageChiquita" src="'+data[3]['foto_url']+'" alt="Card image cap">'+
+                     '<hr style="border-top: 1px solid #e6e6e6">'+
+                     '<div class="card-body body2">'+
+                         '<div class="row">'+
+                             '<div class="col-8">'+
+                                 '<h6 class="card-title">'+data[3]['titulo']+'</h6>'+
+                             '</div>'+
+                             '<div class="col-4">'+
+                               '<p class="font-weight-light centered" style="font-size:17px;">$'+data[3]['valor']+'</p>'+
+                             '</div>'+
+                         '</div>'+
+                     '</div>'+
+               '</div>'+
+           '</a>'+
+        '</div>'+
+        '<div class="row">'+
+           '<a class="nodecored" href="../EvidenciaFinalFront/productDetail.html?id='+data[4]['id']+'">'+
+               '<div class="card" style="width: 20rem; height: 13rem;">'+
+                     '<img class="card-img-top imageChiquita" src="'+data[4]['foto_url']+'" alt="Card image cap">'+
+                     '<hr style="border-top: 1px solid #e6e6e6">'+
+                     '<div class="card-body body2">'+
+                         '<div class="row">'+
+                             '<div class="col-8">'+
+                                 '<h6 class="card-title">'+data[4]['titulo']+'</h6>'+
+                             '</div>'+
+                             '<div class="col-4">'+
+                               '<p class="font-weight-light centered" style="font-size:17px;">$'+data[4]['valor']+'</p>'+
+                             '</div>'+
+                         '</div>'+
+                     '</div>'+
+               '</div>'+
+           '</a>'+
+        '</div>'
+           
+           $('#grandeIzq').html(html1); 
+           $('#chicoEnmedio').html(html2);
+           $('#chicoDer').html(html3);
+        
    
-   $('#grandeIzq').html(html1);
        
       // window.location.replace("/EvidenciaFinalFront/product_list.html");
     }).fail(function(error){
@@ -37,6 +128,11 @@ $(document).ready(function () {
 
 });
 
- 
+     function logout(){
+      sessionStorage.setItem("adminToken", null);
+      sessionStorage.setItem("loginToken", null);
+      sessionStorage.setItem("cartToken", null);
+
+    }
 
 

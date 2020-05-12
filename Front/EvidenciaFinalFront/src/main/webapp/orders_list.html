@@ -7,7 +7,12 @@ and open the template in the editor.
 <html>
 <head>
     <style>
-
+        .inputazo{
+          display: none !important;
+        }
+        .botonazo{
+          display: none !important;
+        }
     </style>
 
         <title>Product List</title>
@@ -20,16 +25,18 @@ and open the template in the editor.
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
     
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
-        <script> 
-            $(function(){
-              $("#includedContent").load("index.html");
-              $('#footer').load("footer.html");
-    </script> 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script> 
+
     <script src="../EvidenciaFinalFront/js/orderListJS.js"></script>
+    <script> 
+        $(function(){
+          $("#includedContent").load("index.html");
+          $('#footer').load("footer.html");
+        });
+    </script>
     </head>
     <body>
-        <div id="includedContent" class="mt-5"></div>
+        <div id="includedContent"></div>
         <div class="row">
         <div class="col-2"></div>
         <div class="col">

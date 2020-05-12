@@ -27,9 +27,7 @@ body {
   padding: 15px;
   margin: auto;
 }
-.form-signin .checkbox {
-  font-weight: 400;
-}
+
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;
@@ -49,10 +47,8 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-#inputPassword2{
-    margin-bottom: 10px;
-}
-#error{
+
+.errores{
     color: red;
     font-size: 12px
 }
@@ -67,7 +63,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 </style>
-        <title>Login</title>
+        <title>Registration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -82,31 +78,29 @@ input[type=number] {
             <img class="mb-4" src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-lighter">Please fill the information</h1>
             
-            <label for="inputName" class="sr-only">Name</label>
+            
             <input type="text" id="inputName" name="uname" class="form-control" placeholder="Name" required autofocus>
+            <div class="d-none errores" id="errorName">This field got to be filled.</div>
             
-            <label for="addressInput" class="sr-only">Address</label>
+            
             <input type="text" id="addressInput" name="addressInput" class="form-control" placeholder="Address" required autofocus>
+            <div class="d-none errores" id="errorAddress">This field got to be filled.</div>
             
-            <label for="inputEmail" class="sr-only">Email address</label>
+            
             <input type="email" id="inputEmail" name="uemail" class="form-control" placeholder="Email address" required autofocus>
+            <div class="d-none errores" id="errorEmail">This is not a valid email.</div>
             
-            <label for="inputPhone" class="sr-only">Phone Number</label>
+            
             <input type="number" id="inputPhone" name="uphone" class="form-control" placeholder="Phone Number" required autofocus>
+            <div class="d-none errores" id="errorPhone">Phone must be a 10 digit number.</div>
             
-            <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" name ="upass" class="form-control" placeholder="Password" required>
             
-            <label for="inputPassword2" class="sr-only">Repeat your Password</label>
             <input type="password" id="inputPassword2" name ="upass2" class="form-control" placeholder="Repeat your Password" required>
             
-            <div class="d-none" id="error">Passwords must be equal and have at least 6 characters</div>
-            <div class="checkbox mb-3">
-              <label>
-                <input type="checkbox" value="remember-me"> Remember me
-              </label>
-            </div>
-            <button id="button" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <div class="d-none errores" id="errorPassword">Passwords must be equal and have at least 6 characters</div>
+            
+            <button id="button" class="btn btn-lg btn-primary btn-block" style="margin-top: 10px;" type="submit">Sign in</button>
           </form>
     </body>
 </html>
