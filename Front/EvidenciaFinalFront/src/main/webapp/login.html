@@ -53,6 +53,15 @@ body {
 .error{
   color: red;
 }
+.noAccount{
+  margin-left: auto;
+  margin-right: auto;
+}
+.registrateAqui{
+  color: blue !important;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>
         <title>Login</title>
         <meta charset="UTF-8">
@@ -79,7 +88,11 @@ body {
             </div>
             <small class="error d-none">Wrong credentials, please try again.</small>
             <button id="button" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017-{{ site.time | date: "%Y" }}</p>
+           <div class="row">
+             <p class="text-muted noAccount">¿No tienes cuenta?</p>
+             <a class="registrateAqui" href="../EvidenciaFinalFront/registration.html"><p class="mb-3 registrateAqui">Registrate Aqui!</p></a>
+           </div>
+            
           </form>
     </body>
 </html>
