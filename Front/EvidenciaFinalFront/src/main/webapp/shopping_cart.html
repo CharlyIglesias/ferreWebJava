@@ -184,15 +184,7 @@ and open the template in the editor.
             });
             
             table.on( 'xhr', function () {
-                var json = table.ajax.json();
-                var JsonData = json;
-                var options = "<option value='{{ user.id }}'>Me</option>";
-                var total = 0;
-                JsonData.forEach(index =>{
-                   total += index.producto.valor * index.cantidad;
-                });
-                $("#subtotal").html("$ "+total);
-                $("#total").html("$ "+total);
+                reloadPrices();
             });
     }
     
@@ -206,7 +198,21 @@ and open the template in the editor.
     function changeQuantity(productId){
         $.post("http://localhost:8081/changeQuantity", {productId, "cartToken": sessionStorage.getItem("cartToken"), "quantity": $(".quantity-product-"+productId).val()}, function(data){
             console.log($(".quantity-product-"+productId).val());
+            reloadPrices();
         });
+    }
+            
+    function reloadPrices(){
+        var json = table.ajax.json();
+        var JsonData = json;
+        var options = "<option value='{{ user.id }}'>Me</option>";
+        var total = 0;
+        JsonData.forEach(index =>{
+        console.log($(".quantity-product-"+index.producto.id).val());
+           total += index.producto.valor * (($(".quantity-product-"+index.producto.id).val() !== undefined) ?  $(".quantity-product-"+index.producto.id).val() : index.cantidad);
+        });
+        $("#subtotal").html("$ "+total);
+        $("#total").html("$ "+total);
     }
     
     

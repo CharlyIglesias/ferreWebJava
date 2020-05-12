@@ -40,7 +40,7 @@ and open the template in the editor.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var shipping = 0;
+var shipping;
 var subtotal = 0;
 var total = 0;
     
@@ -70,9 +70,9 @@ var total = 0;
             $("#order-zip").html(data.carrito.envio.zip);
             $("#order-phone").html(data.carrito.envio.phone);
             $("#order-price").html((data.carrito.envio.price == "0") ? "Free" : "Priority");
-            console.log(data.carrito.envio.price);
-            shippíng = data.carrito.envio.price;
-            $("#shipping").html("$"+parseFloat(shipping));
+            console.log(parseFloat(data.carrito.envio.price));
+            shipping = data.carrito.envio.price;
+            $("#shipping").html("$"+shipping);
             var table = $('#myTable').DataTable({
                         "ajax":{
                             "url" : 'http://localhost:8081/getCart?cartToken='+data.carrito.token,
@@ -106,7 +106,7 @@ var total = 0;
                         JsonData.forEach(index =>{
                            subtotal += index.producto.valor * index.cantidad;
                         });
-                        console.log(subtotal);
+                        console.log(parseFloat(shipping));
                         $("#subtotal").html("$"+(subtotal));
                         $("#total").html("$"+(parseFloat(subtotal) + parseFloat(shipping)));
                     });
